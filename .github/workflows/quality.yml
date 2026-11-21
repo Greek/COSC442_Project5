@@ -30,6 +30,13 @@ jobs:
 
       - name: Run PIT mutation testing
         run: ./mvnw test-compile org.pitest:pitest-maven:mutationCoverage
+      
+      - name: Upload PIT report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pit-report
+          path: ./target/pit-reports/
 
       - name: Run SpotBugs
         run: ./mvnw -B clean compile com.github.spotbugs:spotbugs-maven-plugin:4.10.5.0:spotbugs
@@ -39,12 +46,3 @@ jobs:
         uses: github/codeql-action/upload-sarif@v4
         with:
           sarif_file: ./target/spotbugs.sarif
-
-      - name: Upload PIT report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: pit-report
-          path: target/pit-reports/
-      
-      
