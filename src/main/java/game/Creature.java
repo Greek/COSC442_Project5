@@ -310,8 +310,9 @@ public class Creature {
 	private List<Creature> getCreaturesWhoSeeMe(){
 		List<Creature> others = new ArrayList<Creature>();
 		int r = 9;
-		for (int ox = -r; ox < r+1; ox++){
-			for (int oy = -r; oy < r+1; oy++){
+		int[] offsets = {-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9};
+		for (int ox : offsets){
+			for (int oy : offsets){
 				if (ox*ox + oy*oy > r*r)
 					continue;
 				

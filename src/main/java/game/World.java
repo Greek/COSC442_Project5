@@ -71,17 +71,12 @@ public class World {
 	}
 	
 	public void addAtEmptyLocation(Creature creature, int z){
-		int x;
-		int y;
-		
-		do {
-			x = (int)(Math.random() * width);
-			y = (int)(Math.random() * height);
-		} 
-		while (!tile(x,y,z).isGround() || creature(x,y,z) != null);
-		
-		creature.x = x;
-		creature.y = y;
+		Point location = findEmptyLocation(z, true);
+		if (location == null)
+			return;
+
+		creature.x = location.x;
+		creature.y = location.y;
 		creature.z = z;
 		creatures.add(creature);
 	}
@@ -115,16 +110,32 @@ public class World {
 	}
 	
 	public void addAtEmptyLocation(Item item, int depth) {
-		int x;
-		int y;
-		
-		do {
-			x = (int)(Math.random() * width);
-			y = (int)(Math.random() * height);
-		} 
-		while (!tile(x,y,depth).isGround() || item(x,y,depth) != null);
-		
-		items[x][y][depth] = item;
+		Point location = findEmptyLocation(depth, false);
+		if (location != null)
+			items[location.x][location.y][depth] = item;
+	}
+
+	private Point findEmptyLocation(int z, boolean creatureLocation) {
+		int locationCount = width * height;
+		int randomOffset = (int) (Math.random() * locationCount);
+
+		for (int offset = 0; offset < locationCount; offset++) {
+			int index = (randomOffset + offset) % locationCount;
+			int x = index / height;
+			int y = index % height;
+
+			if (!tile(x, y, z).isGround())
+				continue;
+
+			if (creatureLocation && creature(x, y, z) != null)
+				continue;
+
+			if (!creatureLocation && item(x, y, z) != null)
+				continue;
+
+			return new Point(x, y, z);
+		}
+		return null;
 	}
 
 	public void remove(int x, int y, int z) {
