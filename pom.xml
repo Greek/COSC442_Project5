@@ -72,11 +72,16 @@
                 <configuration>
                     <targetClasses>
                         <param>game.*</param>
-                        <mutationThreshold>80</mutationThreshold>
                     </targetClasses>
                     <excludedClasses>
                         <param>game.ApplicationMain</param>
                     </excludedClasses>
+                    <mutationThreshold>80</mutationThreshold>
+                    <threads>1</threads>
+                    <timeoutConstant>60000</timeoutConstant>
+                    <features>
+                        <param>+ffloop</param>
+                    </features>
                 </configuration>
             </plugin>
             <plugin>
