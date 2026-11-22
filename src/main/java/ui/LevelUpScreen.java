@@ -6,7 +6,9 @@ import java.util.List;
 import asciiPanel.AsciiPanel;
 import game.Creature;
 import game.LevelUpController;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The screen intentionally acts on the shared player creature.")
 public class LevelUpScreen implements Screen {
 	private LevelUpController controller;
 	private Creature player;
@@ -35,13 +37,13 @@ public class LevelUpScreen implements Screen {
 	@Override
 	public Screen respondToUserInput(KeyEvent key) {
 		List<String> options = controller.getLevelUpOptions();
-		String chars = "";
+		StringBuilder chars = new StringBuilder();
 		
 		for (int i = 0; i < options.size(); i++){
-			chars = chars + Integer.toString(i+1);
+			chars.append(i + 1);
 		}
 		
-		int i = chars.indexOf(key.getKeyChar());
+		int i = chars.indexOf(Character.toString(key.getKeyChar()));
 		
 		if (i < 0)
 			return this;

@@ -4,7 +4,9 @@ import java.awt.event.KeyEvent;
 
 import asciiPanel.AsciiPanel;
 import game.Creature;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The lose screen intentionally reads the shared player creature.")
 public class LoseScreen implements Screen {
 	private Creature player;
 	

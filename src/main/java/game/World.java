@@ -20,10 +20,15 @@ public class World {
 	private List<Creature> creatures;
 	
 	public World(Tile[][][] tiles){
-		this.tiles = tiles;
 		this.width = tiles.length;
 		this.height = tiles[0].length;
 		this.depth = tiles[0][0].length;
+		this.tiles = new Tile[width][height][depth];
+		for (int x = 0; x < width; x++) {
+			for (int y = 0; y < height; y++) {
+				System.arraycopy(tiles[x][y], 0, this.tiles[x][y], 0, depth);
+			}
+		}
 		this.creatures = new ArrayList<Creature>();
 		this.items = new Item[width][height][depth];
 	}
@@ -117,7 +122,7 @@ public class World {
 
 	private Point findEmptyLocation(int z, boolean creatureLocation) {
 		int locationCount = width * height;
-		int randomOffset = (int) (Math.random() * locationCount);
+		int randomOffset = java.util.concurrent.ThreadLocalRandom.current().nextInt(locationCount);
 
 		for (int offset = 0; offset < locationCount; offset++) {
 			int index = (randomOffset + offset) % locationCount;

@@ -4,7 +4,9 @@ import game.Creature;
 import game.Item;
 import game.Line;
 import game.Point;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Throw screens intentionally operate on the shared player and item.")
 public class ThrowAtScreen extends TargetBasedScreen {
 	private Item item;
 	

@@ -180,8 +180,8 @@ public class WorldBuilder {
 		int y = -1;
 		
 		do {
-			x = (int)(Math.random() * width);
-			y = (int)(Math.random() * height);
+			x = java.util.concurrent.ThreadLocalRandom.current().nextInt(width);
+			y = java.util.concurrent.ThreadLocalRandom.current().nextInt(height);
 		}
 		while (tiles[x][y][0] != Tile.FLOOR);
 		

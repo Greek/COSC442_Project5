@@ -7,7 +7,9 @@ import asciiPanel.AsciiPanel;
 import game.Creature;
 import game.Item;
 import game.Spell;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Spell screens intentionally operate on the shared player and item.")
 public class ReadSpellScreen implements Screen {
 
 	protected Creature player;

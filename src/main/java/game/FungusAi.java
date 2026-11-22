@@ -1,5 +1,8 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Fungus AI intentionally shares the creature factory.")
 public class FungusAi extends CreatureAi {
 	private StuffFactory factory;
 	private int spreadcount;
@@ -15,8 +18,8 @@ public class FungusAi extends CreatureAi {
 	}
 	
 	private void spread(){
-		int x = creature.x + (int)(Math.random() * 11) - 5;
-		int y = creature.y + (int)(Math.random() * 11) - 5;
+		int x = creature.x + java.util.concurrent.ThreadLocalRandom.current().nextInt(11) - 5;
+		int y = creature.y + java.util.concurrent.ThreadLocalRandom.current().nextInt(11) - 5;
 		
 		if (!creature.canEnter(x, y, creature.z))
 			return;

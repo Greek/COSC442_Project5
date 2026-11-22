@@ -1,8 +1,11 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 public class Inventory {
 
 	private Item[] items;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "The backing array is the inventory's intentional mutable representation.")
 	public Item[] getItems() { return items; }
 	public Item get(int i) { return items[i]; }
 	

@@ -1,9 +1,9 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Creature {
 	private World world;
@@ -19,6 +19,7 @@ public class Creature {
 	public Color color() { return color; }
 
 	private CreatureAi ai;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Creature AI intentionally references this creature.")
 	public void setCreatureAi(CreatureAi ai) { this.ai = ai; }
 	
 	private int maxHp;
@@ -52,6 +53,7 @@ public class Creature {
 	public String name() { return name; }
 
 	private Inventory inventory;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Inventory identity is intentionally shared with the creature.")
 	public Inventory inventory() { return inventory; }
 
 	private int maxFood;
@@ -61,9 +63,11 @@ public class Creature {
 	public int food() { return food; }
 	
 	private Item weapon;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Equipped item identity is intentionally shared.")
 	public Item weapon() { return weapon; }
 	
 	private Item armor;
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP", justification = "Equipped item identity is intentionally shared.")
 	public Item armor() { return armor; }
 	
 	private int xp;
@@ -89,7 +93,7 @@ public class Creature {
 	public void modifyRegenHpPer1000(int amount) { regenHpPer1000 += amount; }
 	
 	private List<Effect> effects;
-	public List<Effect> effects(){ return effects; }
+	public List<Effect> effects(){ return new ArrayList<Effect>(effects); }
 	
 	private int maxMana;
 	public int maxMana() { return maxMana; }
@@ -106,6 +110,7 @@ public class Creature {
 	private String causeOfDeath;
 	public String causeOfDeath() { return causeOfDeath; }
 	
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Creature and world intentionally share the world instance.")
 	public Creature(World world, char glyph, Color color, String name, int maxHp, int attack, int defense){
 		this.world = world;
 		this.glyph = glyph;
@@ -175,9 +180,9 @@ public class Creature {
 	private void commonAttack(Creature other, int attack, String action, Object ... params) {
 		modifyFood(-2);
 		
-		int amount = Math.max(0, attack - other.defenseValue());
+		int amount = Math.max(1, attack - other.defenseValue());
 		
-		amount = (int)(Math.random() * amount) + 1;
+		amount = java.util.concurrent.ThreadLocalRandom.current().nextInt(amount) + 1;
 		
 		Object[] params2 = new Object[params.length+1];
 		for (int i = 0; i < params.length; i++){
@@ -456,6 +461,7 @@ public class Creature {
 		}
 	}
 	
+	@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Equipped items intentionally share item identity with the inventory.")
 	public void equip(Item item){
 		if (!inventory.contains(item)) {
 			if (inventory.isFull()) {

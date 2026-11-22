@@ -1,9 +1,11 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "AI intentionally shares the creature instance.")
 public class CreatureAi {
 	protected Creature creature;
 	private Map<String, String> itemNames;
@@ -58,8 +60,8 @@ public class CreatureAi {
 	}
 	
 	public void wander(){
-		int mx = (int)(Math.random() * 3) - 1;
-		int my = (int)(Math.random() * 3) - 1;
+		int mx = java.util.concurrent.ThreadLocalRandom.current().nextInt(3) - 1;
+		int my = java.util.concurrent.ThreadLocalRandom.current().nextInt(3) - 1;
 		
 		Creature other = creature.creature(creature.x + mx, creature.y + my, creature.z);
 		

@@ -1,6 +1,8 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Zombie AI intentionally tracks the shared player creature.")
 public class ZombieAi extends CreatureAi {
 	private Creature player;
 	

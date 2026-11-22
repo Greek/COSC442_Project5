@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import asciiPanel.AsciiPanel;
 import game.Creature;
 import game.Item;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Inventory screens intentionally operate on the shared player creature.")
 public abstract class InventoryBasedScreen implements Screen {
 
 	protected Creature player;

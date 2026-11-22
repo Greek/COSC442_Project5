@@ -1,5 +1,6 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 
 import asciiPanel.AsciiPanel;
-
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "The factory intentionally creates objects in the shared world.")
 public class StuffFactory {
 	private World world;
 	private Map<String, Color> potionColors;
@@ -164,7 +165,7 @@ public class StuffFactory {
 	}
 	
 	public Item randomWeapon(int depth){
-		switch ((int)(Math.random() * 3)){
+		switch (java.util.concurrent.ThreadLocalRandom.current().nextInt(3)){
 		case 0: return newDagger(depth);
 		case 1: return newSword(depth);
 		case 2: return newBow(depth);
@@ -173,7 +174,7 @@ public class StuffFactory {
 	}
 
 	public Item randomArmor(int depth){
-		switch ((int)(Math.random() * 3)){
+		switch (java.util.concurrent.ThreadLocalRandom.current().nextInt(3)){
 		case 0: return newLightArmor(depth);
 		case 1: return newMediumArmor(depth);
 		default: return newHeavyArmor(depth);
@@ -303,7 +304,7 @@ public class StuffFactory {
 	}
 	
 	public Item randomPotion(int depth){
-		switch ((int)(Math.random() * 9)){
+		switch (java.util.concurrent.ThreadLocalRandom.current().nextInt(9)){
 		case 0: return newPotionOfHealth(depth);
 		case 1: return newPotionOfHealth(depth);
 		case 2: return newPotionOfMana(depth);
@@ -392,8 +393,8 @@ public class StuffFactory {
 				
 				do
 				{
-					mx = (int)(Math.random() * 11) - 5;
-					my = (int)(Math.random() * 11) - 5;
+					mx = java.util.concurrent.ThreadLocalRandom.current().nextInt(11) - 5;
+					my = java.util.concurrent.ThreadLocalRandom.current().nextInt(11) - 5;
 				}
 				while (!creature.canEnter(creature.x+mx, creature.y+my, creature.z)
 						&& creature.canSee(creature.x+mx, creature.y+my, creature.z));
@@ -446,7 +447,7 @@ public class StuffFactory {
 	
 
 	public Item randomSpellBook(int depth){
-		switch ((int)(Math.random() * 2)){
+		switch (java.util.concurrent.ThreadLocalRandom.current().nextInt(2)){
 		case 0: return newWhiteMagesSpellbook(depth);
 		default: return newBlueMagesSpellbook(depth);
 		}

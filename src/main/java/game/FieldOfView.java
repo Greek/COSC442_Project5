@@ -1,5 +1,8 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Field of view intentionally observes the shared world.")
 public class FieldOfView {
 	private World world;
 	private int depth;

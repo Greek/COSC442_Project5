@@ -1,7 +1,9 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.util.List;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Player AI intentionally shares the message and field-of-view state.")
 public class PlayerAi extends CreatureAi {
 
 	private List<String> messages;

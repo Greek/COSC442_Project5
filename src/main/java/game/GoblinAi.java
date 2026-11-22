@@ -1,6 +1,8 @@
 package game;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Goblin AI intentionally tracks the shared player creature.")
 public class GoblinAi extends CreatureAi {
 	private Creature player;
 	

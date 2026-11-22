@@ -5,7 +5,9 @@ import asciiPanel.AsciiPanel;
 import game.Creature;
 import game.Line;
 import game.Point;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+@SuppressFBWarnings(value = "EI_EXPOSE_REP2", justification = "Target screens intentionally operate on the shared player creature.")
 public abstract class TargetBasedScreen implements Screen {
 
 	protected Creature player;

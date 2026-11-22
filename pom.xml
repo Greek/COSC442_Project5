@@ -16,6 +16,12 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.github.spotbugs</groupId>
+            <artifactId>spotbugs-annotations</artifactId>
+            <version>4.10.5</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- JoshHack graphics library -->
         <dependency>
