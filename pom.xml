@@ -84,6 +84,7 @@
                     </excludedClasses>
                     <threads>1</threads>
                     <timeoutConstant>60000</timeoutConstant>
+                    <mutationThreshold>80</mutationThreshold>
                     <features>
                         <param>+ffloop</param>
                     </features>
